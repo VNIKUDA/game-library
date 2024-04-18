@@ -25,6 +25,7 @@ class Game(Base):
 
     developer = relationship("Developer", back_populates="games")
     genre = relationship("Genre", back_populates="games")
+    reviews = relationship("Review", back_populates="game")
 
 # Клас жанру
 class Genre(Base):
@@ -36,7 +37,13 @@ class Genre(Base):
     games = relationship("Game", back_populates="genre")
 
 # Клас відгук
-# class Review(Base):
-#     __tablename__ = "reviews"
+class Review(Base):
+    __tablename__ = "reviews"
 
-#     id = Column
+    id = Column(Integer, index=True, primary_key=True)
+    user = Column(String, index=True)
+    text = Column(String, index=True)
+
+    game_id = Column(Integer, ForeignKey("games.id"))
+
+    game = relationship("Game", back_populates="reviews")
