@@ -8,7 +8,7 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./app.db"
 
 # Двигун (не перевіряти однакові процеси)
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_threads": False}
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
 # Локальна сесії без авто пітвердження та змивання 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
